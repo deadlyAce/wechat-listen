@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container" style="backgroud: blue">
+<view class="guide">
+      <text>小幸运</text>
+       <view style="width:250rpx;height:250rpx;left:250rpx;top:12rpx;position:relative;" wx:if="{{isplay==false}}" bindtap='play'> 播放 </view>
+<!--当前为播放状态  -->
+<view style="width:250rpx;height:250rpx;left:250rpx;top:12rpx;position:relative;" wx:if="{{isplay==true}}" bindtap='stop'>暂停</view>
+</view>
+</view>
