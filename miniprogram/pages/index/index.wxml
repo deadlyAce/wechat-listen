@@ -1,9 +1,75 @@
 <!--index.wxml-->
-<view class="container" style="backgroud: blue">
-<view class="guide">
-      <text>小幸运</text>
-       <view style="width:250rpx;height:250rpx;left:250rpx;top:12rpx;position:relative;" wx:if="{{isplay==false}}" bindtap='play'> 播放 </view>
-<!--当前为播放状态  -->
-<view style="width:250rpx;height:250rpx;left:250rpx;top:12rpx;position:relative;" wx:if="{{isplay==true}}" bindtap='stop'>暂停</view>
-</view>
-</view>
+<van-tabs animated bind:click="getPlayMusic">
+  <van-tab title="网易云">
+    <van-card
+     wx:for="{{neteaseData}}" wx:for-index="key"  wx:for-item="value"
+        tag="歌单"
+        centered="true"
+        title="{{value.title}}"
+        thumb="{{ value.cover_img_url }}">
+        <view slot="footer">
+          <van-button size="mini" type="info" data-id="{{ value.id }}" bindtap="showList">查看详情</van-button>
+        </view>
+      </van-card>
+  </van-tab>
+  <van-tab title="QQ音乐">
+      <van-card
+        wx:for="{{qqData}}" wx:for-index="key"  wx:for-item="value"
+        tag="歌单"
+        centered="true"
+        title="{{value.title}}"
+        thumb="{{ value.cover_img_url }}">
+        <view slot="footer">
+          <van-button size="mini" type="info" bind:click="showList(value.id)">查看详情</van-button>
+        </view>
+      </van-card>
+  </van-tab>
+  <van-tab title="虾米">
+      <van-card
+        wx:for="{{xiamiData}}" wx:for-index="key"  wx:for-item="value"
+        tag="歌单"
+        centered="true"
+        title="{{value.title}}"
+        thumb="{{ value.cover_img_url }}">
+        <view slot="footer">
+          <van-button size="mini" type="info" bind:click="showList(value.id)">查看详情</van-button>
+        </view>
+      </van-card>
+  </van-tab>
+  <van-tab title="酷狗">
+      <van-card
+        wx:for="{{kugouData}}" wx:for-index="key"  wx:for-item="value"
+        tag="歌单"
+        centered="true"
+        title="{{value.title}}"
+        thumb="{{ value.cover_img_url }}">
+        <view slot="footer">
+          <van-button size="mini" type="info" bind:click="showList(value.id)">查看详情</van-button>
+        </view>
+      </van-card>
+  </van-tab>
+  <van-tab title="酷我">
+      <van-card
+        wx:for="{{kuwoData}}" wx:for-index="key"  wx:for-item="value"
+        tag="歌单"
+        centered="true"
+        title="{{value.title}}"
+        thumb="{{ value.cover_img_url }}">
+        <view slot="footer">
+          <van-button size="mini" type="info" bind:click="showList(value.id)">查看详情</van-button>
+        </view>
+      </van-card>
+  </van-tab>
+  <van-tab title="bilibili">
+      <van-card
+        wx:for="{{bilibiliData}}" wx:for-index="key"  wx:for-item="value"
+        tag="歌单"
+        centered="true"
+        title="{{value.title}}"
+        thumb="{{ value.cover_img_url }}">
+        <view slot="footer">
+          <van-button size="mini" type="info" bind:click="showList(value.id)">查看详情</van-button>
+        </view>
+      </van-card>
+  </van-tab>
+</van-tabs>

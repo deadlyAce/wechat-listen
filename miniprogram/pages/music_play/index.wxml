@@ -1,0 +1,5 @@
+<view class="guide" wx:if="{{isShow}}">
+  <text>{{title}}</text>
+  <van-button type="info" bindtap='play' wx:if="{{isplay==false}}" >播放</van-button>
+  <van-button type="warning" bindtap='stop' wx:if="{{isplay==true}}">停止</van-button>
+</view>

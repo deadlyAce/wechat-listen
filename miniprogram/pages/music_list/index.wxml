@@ -1,0 +1,19 @@
+    <van-card
+      tag="歌单信息"
+      centered="true"
+      title="{{listInfo.title}}"
+      thumb="{{ listInfo.cover_img_url }}">
+    </van-card>
+
+    <van-card
+      wx:for="{{itemList}}" wx:for-index="key"  wx:for-item="value"
+      tag="歌曲"
+      centered="true"
+      title="{{value.album}} 【{{value.artist}}】"
+      thumb="{{ value.img_url }}">
+      <view slot="footer">
+        <van-button size="mini" type="info" 
+        data-title="{{value.album}} 【{{value.artist}}】"
+        data-id="{{ value.id }}" bindtap="listen">听歌</van-button>
+      </view>
+    </van-card>

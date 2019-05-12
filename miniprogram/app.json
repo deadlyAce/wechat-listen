@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/music_list/index",
+    "pages/music_play/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

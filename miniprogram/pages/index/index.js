@@ -1,43 +1,56 @@
 //index.js
-const app = getApp()
-const myaudio = wx.createInnerAudioContext();
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: '',
     isplay: false,
+    neteaseData: [],
+    qqData: [],
+    xiamiData: [],
+    kugouData: [],
+    kuwoData: [],
+    bilibiliData: []
   },
 
-  onLoad: function() {
-    // this.onGetPlayMusic('netease');
+  onLoad() {
+    this.getPlayMusic({ detail: {index: 0} });
     // this.onGetMusicList('neplaylist_2222557345');
     // this.onGetSearchMusic('netease', '小幸运', 1);
     // this.onGetLyric('netrack_537854958');
     // this.onGetMusicUrl('netrack_537854958');
   },
 
-  onShow: function () {
-    myaudio.src = "http://m10.music.126.net/20190512000923/c897116dbb4cde5b1403dd8a42c9854c/ymusic/722d/3423/8e4b/cde2ef1e41c58dad5683f50d3cf4da48.mp3";
+
+  showList(event) {
+    wx.navigateTo({
+      url: `../music_list/index?listId=${event.currentTarget.dataset.id}`
+    })
   },
 
-  //播放
-  play: function () {
-    myaudio.play();
-    this.setData({ isplay: true });
-  },
-
-  // 停止
-  stop: function () {
-    myaudio.pause();
-    this.setData({ isplay: false });
+  getPlayMusic(event) {
+    switch (event.detail.index) {
+      case 0:
+        this.onGetPlayMusic('netease', 'neteaseData');
+        break;
+      case 1:
+        this.onGetPlayMusic('qq', 'qqData');
+        break;
+      case 2:
+        this.onGetPlayMusic('xiami', 'xiamiData');
+        break;
+      case 3:
+        this.onGetPlayMusic('kugou', 'kugouData');
+        break;
+      case 4:
+        this.onGetPlayMusic('kuwo', 'kuwoData');
+        break;
+      case 5:
+        this.onGetPlayMusic('bilibili', 'bilibiliData');
+        break;
+    }
   },
 
   // 平台音乐榜 //netease, qq, xiami, kugou, kuwo, bilibili
-  onGetPlayMusic(platform) {
+  onGetPlayMusic(platform, objData) {
     wx.cloud.callFunction({
       name: 'Listener',
       data: {
@@ -45,26 +58,41 @@ Page({
         data: { platform }
       },
       success: res => {
-        console.log(res);
+        switch (objData) {
+          case 'neteaseData':
+            this.setData({
+              neteaseData: res.result.result
+            });
+            break;
+          case 'qqData':
+            this.setData({
+              qqData: res.result.result
+            });
+            break;
+          case 'xiamiData':
+            this.setData({
+              xiamiData: res.result.result
+            });
+            break;
+          case 'kugouData':
+            this.setData({
+              kugouData: res.result.result
+            });
+            break;
+          case 'kuwoData':
+            this.setData({
+              kuwoData: res.result.result
+            });
+            break;
+          case 'bilibiliData':
+            this.setData({
+              bilibiliData: res.result.result
+            });
+            break;
+        }
       },
       fail: e => {
-        console.error(e)
-      }
-    })
-  },
-
-  onGetMusicList(listId) {
-    wx.cloud.callFunction({
-      name: 'Listener',
-      data: {
-        opr: 'list_music',
-        data: { listId }
-      },
-      success: res => {
-        console.log(res);
-      },
-      fail: e => {
-        console.error(e)
+        console.log(e)
       }
     })
   },
